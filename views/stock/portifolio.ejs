@@ -1,0 +1,28 @@
+<%- include("../partials/header") %>
+<div class="container py-xl-3 py-lg-3 py-md-3 py-sm-3 py-3">
+  <h1>Portifolio</h1>
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Symbol</th>
+        <th scope="col">Total Shares</th>
+        <th scope="col">Current Price</th>
+      </tr>
+    </thead>
+    <% for( let index = 0; index < portifolio.length; index++ ) { %>
+    <tbody>
+      <tr>
+        <td>
+          <a href="/portifolio/<%= portifolio[index].symbol %>"
+            ><%= portifolio[index].symbol %></a
+          >
+        </td>
+        <td><%= portifolio[index].totalShares %></td>
+        <td><%= Number(portifolio[index].currentPrice).toFixed(2) %></td>
+      </tr>
+    </tbody>
+    <% } %>
+  </table>
+</div>
+<%- include("../partials/footer") %>

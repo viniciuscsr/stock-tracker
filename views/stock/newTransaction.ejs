@@ -1,0 +1,51 @@
+<%- include("../partials/header") %>
+
+<body class="text-center login-body">
+  <form action="/portifolio/" method="POST" class="form-signin">
+    <h1 class="h3 mb-3 font-weight-normal">Add Transaction</h1>
+    <label>Symbol</label>
+    <input
+      type="text"
+      name="symbol"
+      id="inputEmail"
+      class="form-control"
+      placeholder="Symbol"
+      required
+      autofocus
+    />
+    <label>Shares</label>
+    <input
+      type="number"
+      name="shares"
+      id="inputEmail"
+      class="form-control"
+      placeholder="Shares"
+      required
+      autofocus
+    />
+    <label>Average Price</label>
+    <input
+      type=""
+      name="avgPrice"
+      id="inputEmail"
+      class="form-control"
+      placeholder="Average Price"
+      required
+      autofocus
+    />
+    <label for="inputPassword">Operation Type</label>
+    <select class="form-control" name="type">
+      <option hidden disabled selected value> -- select an option -- </option>
+      <option value="buy">Buy</option>
+      <option value="sell">Sell</option>
+    </select>
+    <button
+      class="btn btn-lg btn-primary btn-block button-spacing"
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</body>
+
+<%- include("../partials/footer") %>

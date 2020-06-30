@@ -1,0 +1,188 @@
+<%- include("../partials/header") %>
+
+<!-- Stock Summary -->
+<div class="container py-xl-3 py-lg-3 py-md-3 py-sm-3 py-3">
+  <h2>Summary</h2>
+  <div>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Symbol</th>
+          <th scope="col">Total Shares</th>
+          <th scope="col">Total Avg. Price</th>
+          <th scope="col">Current Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= stock.symbol %></td>
+          <td><%= stock.shares %></td>
+          <td><%= Number(stock.avgPrice).toFixed(2) %></td>
+          <td><%= Number(stock.currentPrice).toFixed(2) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Transactions -->
+<div class="container py-xl-3 py-lg-3 py-md-3 py-sm-3 py-3">
+  <h2>Transactions</h2>
+  <div>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Type</th>
+          <th scope="col">Shares</th>
+          <th scope="col">Avg. Price</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <% for( let index = 0; index < stock.transactions.length; index++ ) { %>
+      <tbody>
+        <tr>
+          <td><%= stock.transactions[index].type %></td>
+          <td><%= stock.transactions[index].shares %></td>
+          <td><%= Number(stock.transactions[index].avg_price).toFixed(2) %></td>
+          <td>
+            <a
+              href="/portifolio/<%= stock.transactions[index].transactionid %>/edit"
+            >
+              <button type="button" class="btn btn-outline-warning btn-sm">
+                Edit
+              </button></a
+            >
+            <form
+              action="/portifolio/<%= stock.transactions[index].transactionid %>?_method=DELETE"
+              method="POST"
+            >
+              <button class="btn btn-outline-danger btn-sm">
+                Delete
+              </button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+      <% } %>
+    </table>
+  </div>
+</div>
+
+<!-- News Section -->
+
+<div class="container">
+  <h2>Related News</h2>
+  <div class="row">
+    <div class="col-lg-4 col-sm-6 mb-4">
+      <div class="card h-100">
+        <a href="<%= stock.news[0].url %>"
+          ><img
+            class="card-img-top"
+            src="<%= stock.news[0].urlToImage %>"
+            alt=""
+        /></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="<%= stock.news[0].url %>"><%= stock.news[0].title %></a>
+          </h4>
+          <p class="card-text">
+            <%= stock.news[0].description %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-6 mb-4">
+      <div class="card h-100">
+        <a href="<%= stock.news[1].url %>"
+          ><img
+            class="card-img-top"
+            src="<%= stock.news[1].urlToImage %>"
+            alt=""
+        /></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="<%= stock.news[1].url %>"><%= stock.news[1].title %></a>
+          </h4>
+          <p class="card-text">
+            <%= stock.news[1].description %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-6 mb-4">
+      <div class="card h-100">
+        <a href="<%= stock.news[2].url %>"
+          ><img
+            class="card-img-top"
+            src="<%= stock.news[2].urlToImage %>"
+            alt=""
+        /></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="<%= stock.news[2].url %>"><%= stock.news[2].title %></a>
+          </h4>
+          <p class="card-text">
+            <%= stock.news[2].description %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-6 mb-4">
+      <div class="card h-100">
+        <a href="<%= stock.news[3].url %>"
+          ><img
+            class="card-img-top"
+            src="<%= stock.news[3].urlToImage %>"
+            alt=""
+        /></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="<%= stock.news[3].url %>"><%= stock.news[3].title %></a>
+          </h4>
+          <p class="card-text">
+            <%= stock.news[3].description %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-6 mb-4">
+      <div class="card h-100">
+        <a href="<%= stock.news[4].url %>"
+          ><img
+            class="card-img-top"
+            src="<%= stock.news[4].urlToImage %>"
+            alt=""
+        /></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="<%= stock.news[4].url %>"><%= stock.news[4].title %></a>
+          </h4>
+          <p class="card-text">
+            <%= stock.news[4].description %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-6 mb-4">
+      <div class="card h-100">
+        <a href="<%= stock.news[5].url %>"
+          ><img
+            class="card-img-top"
+            src="<%= stock.news[5].urlToImage %>"
+            alt=""
+        /></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="<%= stock.news[5].url %>"><%= stock.news[5].title %></a>
+          </h4>
+          <p class="card-text">
+            <%= stock.news[5].description %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+</div>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,40 @@
+<%- include("../partials/header") %>
+
+<body class="text-center login-body">
+  <form action="login" method="POST" class="form-signin">
+    <img
+      class="mb-4"
+      src="/public/icons/stock-market-icon-vector-5784200.jpg"
+      alt=""
+      width="72"
+      height="72"
+    />
+    <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
+    <label for="inputEmail" class="sr-only">Email Address</label>
+    <input
+      type="email"
+      name="email"
+      id="inputEmail"
+      class="form-control"
+      placeholder="Email Address"
+      required
+      autofocus
+    />
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input
+      type="password"
+      name="password"
+      id="inputPassword"
+      class="form-control"
+      placeholder="Password"
+      required
+    />
+    <button
+      class="btn btn-lg btn-primary btn-block button-spacing"
+      type="submit"
+    >
+      Login
+    </button>
+  </form>
+</body>
+<%- include("../partials/footer") %>

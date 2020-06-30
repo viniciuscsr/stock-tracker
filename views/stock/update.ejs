@@ -1,0 +1,55 @@
+<%- include("../partials/header") %>
+
+<body class="text-center login-body">
+  <form
+    action="/portifolio/<%= transaction.transactionid %>/?_method=PATCH"
+    method="POST"
+    class="form-signin"
+  >
+    <h1 class="h3 mb-3 font-weight-normal">Edit Transaction</h1>
+    <label>Symbol</label>
+    <input
+      type="text"
+      name="symbol"
+      id="inputEmail"
+      class="form-control"
+      value="<%=transaction.symbol%>"
+      autofocus
+      readonly
+    />
+    <label>Shares</label>
+    <input
+      type="number"
+      name="shares"
+      id="inputEmail"
+      class="form-control"
+      value="<%=transaction.shares%>"
+      required
+      autofocus
+    />
+    <label>Average Price</label>
+    <input
+      type=""
+      name="avgPrice"
+      id="inputEmail"
+      class="form-control"
+      value="<%=Number(transaction.avg_price).toFixed(2)%>"
+      required
+      autofocus
+    />
+    <label for="inputPassword">Operation Type</label>
+    <select class="form-control" name="type">
+      <option hidden disabled selected value> -- select an option -- </option>
+      <option value="buy">Buy</option>
+      <option value="sell">Sell</option>
+    </select>
+    <button
+      class="btn btn-lg btn-primary btn-block button-spacing"
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</body>
+
+<%- include("../partials/footer") %>
