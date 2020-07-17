@@ -6,21 +6,6 @@ const pool = require('../db');
 const middlewareObj = require('../middleware/index');
 const axios = require('axios');
 const totals = require('../customFunctions/totals');
-const socket = new WebSocket('wss://ws.finnhub.io?token=brqm3bfrh5rce3ls8kqg');
-
-// socket.addEventListener('open', function (event) {
-//   socket.send(JSON.stringify({ type: 'subscribe', symbol: 'AAPL' }));
-// });
-
-// // Listen for messages
-// socket.addEventListener('message', function (event) {
-//   console.log('Message from server ', event.data);
-// });
-
-// // Unsubscribe
-// var unsubscribe = function (symbol) {
-//   socket.send(JSON.stringify({ type: 'unsubscribe', symbol: symbol }));
-// };
 
 router.get('/', async (req, res) => {
   res.render('home');
