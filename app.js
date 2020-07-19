@@ -32,6 +32,6 @@ app.use(passport.session());
 app.use('/', portifolio);
 app.use('/user', user);
 
-app.listen(3000, (err, res) => {
+app.listen(process.env.PORT || 3000, (err, res) => {
   console.log('Server is Running on port 3000');
 });
