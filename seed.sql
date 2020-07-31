@@ -13,4 +13,4 @@ CREATE TABLE portifolio(
     userid VARCHAR(50),
     type VARCHAR(50),
     transactionid SERIAL PRIMARY KEY
-)
+);
