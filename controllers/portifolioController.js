@@ -38,10 +38,10 @@ portifolioController.portifolioIndex = async (req, res) => {
     try {
       totalShares = await totals.totalShares(req.user.id, ticker);
       // Fetching the current price from an external API (FREE VERSION LIMIT = 5 requests per minute)
-      let apiData;
+      let endOfDayPriceApi;
       try {
-        apiData = await axios.get(
-          `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=79C8ZWHOKHH32FNM`
+        endOfDayPriceApi = await axios.get(
+          `https://api.tiingo.com/tiingo/daily/${ticker}/prices?token=${process.env.TIINGO_TOKEN}`
         );
       } catch (err) {
         console.log(err);
@@ -50,7 +50,7 @@ portifolioController.portifolioIndex = async (req, res) => {
       let finalStock = {
         symbol: ticker,
         totalShares: totalShares.rows[0].total,
-        currentPrice: apiData.data['Global Quote']['05. price'],
+        currentPrice: endOfDayPriceApi.data[0].adjClose,
       };
       // Pushing the final stock object to the array
       portifolioArray.push(finalStock);
@@ -161,10 +161,10 @@ portifolioController.stockShowPage = async (req, res) => {
   }
 
   // getting data from the stock api
-  let apiData;
+  let endOfDayPriceApi;
   try {
-    apiData = await axios.get(
-      `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${upperSymbol}&apikey=79C8ZWHOKHH32FNM`
+    endOfDayPriceApi = await axios.get(
+      `https://api.tiingo.com/tiingo/daily/${upperSymbol}/prices?token=${process.env.TIINGO_TOKEN}`
     );
   } catch (err) {
     console.log(err);
@@ -191,7 +191,7 @@ portifolioController.stockShowPage = async (req, res) => {
 
   const stockObj = {
     symbol: upperSymbol,
-    currentPrice: apiData.data['Global Quote']['05. price'],
+    currentPrice: endOfDayPriceApi.data[0].adjClose,
     shares: tShares.rows[0].total,
     avgPrice: dbStock.rows[0].avg_price,
     news: stockNews.data.articles,
