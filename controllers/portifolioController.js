@@ -175,7 +175,7 @@ portifolioController.stockShowPage = async (req, res) => {
 
   try {
     stockNews = await axios.get(
-      `https://newsapi.org/v2/everything?q=${upperSymbol}&language=en&domains=finance.yahoo.com,fool.com,cnbc.com,investors.com&apiKey=2ab77b0b4af442d9851c5e7fe42bd557`
+      `https://newsapi.org/v2/everything?q=${upperSymbol}&language=en&domains=finance.yahoo.com,fool.com,cnbc.com,investors.com&apiKey=${process.env.NEWS_API_KEY}`
     );
   } catch (err) {
     console.log(err);
