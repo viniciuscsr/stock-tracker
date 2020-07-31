@@ -4,6 +4,10 @@ const pool = require('../db');
 const axios = require('axios');
 const totals = require('../customFunctions/totals');
 
+// -----------------
+// PORTIFOLIO INDEX
+// -----------------
+
 portifolioController.portifolioIndex = async (req, res) => {
   // Getting all symbols from transactions by a specific user
   let dbStock;
@@ -59,6 +63,10 @@ portifolioController.portifolioIndex = async (req, res) => {
   });
 };
 
+// -----------------
+// NEW TRANSACTION
+// -----------------
+
 portifolioController.getNewTransaction = (req, res) => {
   res.render('stock/newTransaction');
 };
@@ -81,6 +89,10 @@ portifolioController.postNewTransaction = (req, res) => {
     }
   );
 };
+
+// -----------------
+// UPDATE TRANSACTION
+// -----------------
 
 portifolioController.getUpdateTransaction = async (req, res) => {
   let transaction;
@@ -110,6 +122,10 @@ portifolioController.patchUpdateTransaction = (req, res) => {
   );
 };
 
+// -----------------
+// DELETE TRANSACTION
+// -----------------
+
 portifolioController.deleteTransaction = (req, res) => {
   pool.query(
     'DELETE FROM portifolio WHERE transactionid=($1)',
@@ -122,6 +138,10 @@ portifolioController.deleteTransaction = (req, res) => {
     }
   );
 };
+
+// -----------------
+// SHOW PAGE
+// -----------------
 
 portifolioController.stockShowPage = async (req, res) => {
   const upperSymbol = req.params.symbol.toUpperCase();

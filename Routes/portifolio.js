@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const pool = require('../db');
 const middlewareObj = require('../middleware/index');
-const axios = require('axios');
-const totals = require('../customFunctions/totals');
 const portifolioController = require('../controllers/portifolioController');
 
 router.get('/', async (req, res) => {
