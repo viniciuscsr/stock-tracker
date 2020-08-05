@@ -1,31 +1,32 @@
 const pool = require('../db');
+const portifolioMetrics = {};
 
-class UserShares {
-  constructor(symbol, userId) {
-    (this.symbol = symbol), (this.userId = userId), (this.totalShares = 0);
-  }
+// class UserShares {
+//   constructor(symbol, userId) {
+//     (this.symbol = symbol), (this.userId = userId), (this.totalShares = 0);
+//   }
 
-  async calculatingTotalShares() {
-    this.totalShares = await pool.query(
-      'SELECT SUM (shares) AS total FROM portifolio WHERE userid=$1 AND symbol=$2',
-      [this.userId, this.symbol]
-    );
-    console.log(this.totalShares.rows);
-    return this;
-  }
-}
+//   async calculatingTotalShares() {
+//     this.totalShares = await pool.query(
+//       'SELECT SUM (shares) AS total FROM portifolio WHERE userid=$1 AND symbol=$2',
+//       [this.userId, this.symbol]
+//     );
+//     console.log(this.totalShares.rows);
+//     return this;
+//   }
+// }
 
 // const testUser = new UserShares('DIS', 2);
 // testUser.calculatingTotalShares();
 
-function totalShares(userId, symbol) {
+portifolioMetrics.totalShares = function (userId, symbol) {
   return pool.query(
     'SELECT SUM (shares) AS total FROM portifolio WHERE userid=$1 AND symbol=$2',
     [userId, symbol]
   );
-}
+};
 
-async function averageCost(userId, symbol) {
+portifolioMetrics.averageCost = async function (userId, symbol) {
   let gettingAvgPriceAndShares;
   let subTotals = [];
   let totalShares = 0;
@@ -58,15 +59,12 @@ async function averageCost(userId, symbol) {
     for (let i = 0; i < subTotals.length; i++) {
       totalCost = totalCost + subTotals[i];
     }
-    console.log(totalCost);
   } catch (err) {
     console.log(err);
   }
 
   let avg_price = totalCost / totalShares;
   return avg_price;
-}
+};
 
-averageCost(2, 'DIS');
-
-exports.totalShares = totalShares;
+module.exports = portifolioMetrics;

@@ -2,7 +2,7 @@ const portifolioController = {};
 
 const pool = require('../db');
 const axios = require('axios');
-const totals = require('../customFunctions/totals');
+const portifolioMetrics = require('../customFunctions/totals');
 
 // -----------------
 // PORTIFOLIO INDEX
@@ -36,7 +36,7 @@ portifolioController.portifolioIndex = async (req, res) => {
 
     let totalShares;
     try {
-      totalShares = await totals.totalShares(req.user.id, ticker);
+      totalShares = await portifolioMetrics.totalShares(req.user.id, ticker);
       // Fetching the current price from an external API (FREE VERSION LIMIT = 5 requests per minute)
       let endOfDayPriceApi;
       try {
@@ -184,7 +184,19 @@ portifolioController.stockShowPage = async (req, res) => {
   // total shares
   let tShares;
   try {
-    tShares = await totals.totalShares(req.user.id, upperSymbol);
+    tShares = await portifolioMetrics.totalShares(req.user.id, upperSymbol);
+  } catch (err) {
+    console.log(err);
+  }
+
+  // total average price - weighted average
+  let totalAverageCost;
+  try {
+    totalAverageCost = await portifolioMetrics.averageCost(
+      req.user.id,
+      upperSymbol
+    );
+    console.log(totalAverageCost);
   } catch (err) {
     console.log(err);
   }
@@ -193,7 +205,7 @@ portifolioController.stockShowPage = async (req, res) => {
     symbol: upperSymbol,
     currentPrice: endOfDayPriceApi.data[0].adjClose,
     shares: tShares.rows[0].total,
-    avgPrice: dbStock.rows[0].avg_price,
+    avgPrice: totalAverageCost,
     news: stockNews.data.articles,
     transactions: dbStock.rows,
   };
